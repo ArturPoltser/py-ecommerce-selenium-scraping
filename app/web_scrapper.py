@@ -12,6 +12,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from tqdm import tqdm
 
 from app.product_class import PRODUCT_FIELDS, Product
 
@@ -89,7 +90,7 @@ class WebScraper:
         self._click_more_button()
         products = self.driver.find_elements(By.CLASS_NAME, "thumbnail")
 
-        return [self._parse_single_product(product) for product in products]
+        return [self._parse_single_product(product) for product in tqdm(products)]
 
     def _click_more_button(self) -> None:
         while True:
